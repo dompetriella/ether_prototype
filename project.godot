@@ -10,9 +10,9 @@ config_version=5
 
 [application]
 
-config/name="game_template_c_sharp"
+config/name="ether_prototype"
 run/main_scene="res://Game.tscn"
-config/features=PackedStringArray("4.4", "C#", "Mobile")
+config/features=PackedStringArray("4.5", "C#", "Mobile")
 config/icon="res://Assets/Images/icon.svg"
 
 [autoload]

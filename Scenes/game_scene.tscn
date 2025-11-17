@@ -1,0 +1,99 @@
+[gd_scene load_steps=7 format=3 uid="uid://by5y1ekxx86xy"]
+
+[ext_resource type="PackedScene" uid="uid://db1c6cylyqy42" path="res://Scenes/Entities/Player/Player.tscn" id="1_x87qo"]
+[ext_resource type="PackedScene" uid="uid://dpop08al81sfj" path="res://Scenes/Entities/Enemy/Enemy.tscn" id="2_b6fju"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6h5vk"]
+size = Vector2(1157, 297)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b6fju"]
+size = Vector2(320, 726)
+
+[sub_resource type="Gradient" id="Gradient_x87qo"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_b6fju"]
+gradient = SubResource("Gradient_x87qo")
+fill_from = Vector2(0.44859812, 0.49766356)
+
+[node name="GameScene" type="Node"]
+
+[node name="RootGame" type="Node2D" parent="."]
+
+[node name="Structure" type="Node2D" parent="RootGame"]
+
+[node name="Edges" type="Node2D" parent="RootGame/Structure"]
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="RootGame/Structure/Edges"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RootGame/Structure/Edges/StaticBody2D2"]
+position = Vector2(575, -120)
+shape = SubResource("RectangleShape2D_6h5vk")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RootGame/Structure/Edges/StaticBody2D2"]
+position = Vector2(579, 771)
+shape = SubResource("RectangleShape2D_6h5vk")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="RootGame/Structure/Edges"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RootGame/Structure/Edges/StaticBody2D"]
+position = Vector2(160, 339)
+shape = SubResource("RectangleShape2D_b6fju")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RootGame/Structure/Edges/StaticBody2D"]
+position = Vector2(992, 324)
+shape = SubResource("RectangleShape2D_b6fju")
+
+[node name="Spawn" type="Marker2D" parent="RootGame/Structure"]
+unique_name_in_owner = true
+position = Vector2(572, 132)
+
+[node name="Player" parent="RootGame" instance=ExtResource("1_x87qo")]
+position = Vector2(578, 560)
+
+[node name="Enemy" parent="RootGame" instance=ExtResource("2_b6fju")]
+position = Vector2(574, 130)
+TotalHealth = 500
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftPanel" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 320.0
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/LeftPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_b6fju")
+
+[node name="RightPanel" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Control/RightPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_b6fju")

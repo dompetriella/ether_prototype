@@ -1,26 +1,34 @@
-[gd_scene load_steps=9 format=3 uid="uid://db1c6cylyqy42"]
+[gd_scene load_steps=10 format=3 uid="uid://db1c6cylyqy42"]
 
 [ext_resource type="Script" uid="uid://5x8dmkp1coq2" path="res://Scenes/Entities/Player/Player.cs" id="1_afppm"]
 [ext_resource type="Script" uid="uid://h3qm880cjjtb" path="res://Common/Components/SpeedComponent.cs" id="2_hi4ft"]
 [ext_resource type="Texture2D" uid="uid://cqv2thbgs86be" path="res://Assets/Images/icon.svg" id="2_n1xdv"]
+[ext_resource type="PackedScene" uid="uid://cwviy0jhd20uc" path="res://Scenes/Objects/Projectile/projectile.tscn" id="2_vgr12"]
 [ext_resource type="Script" uid="uid://ckxysjv1eqmrn" path="res://Scenes/Entities/Player/StateMachine/PlayerStateMachine.cs" id="3_hgjck"]
 [ext_resource type="Script" uid="uid://0nxallki2e4l" path="res://Scenes/Entities/Player/StateMachine/States/Idle.cs" id="4_hgjck"]
 [ext_resource type="Script" uid="uid://ea572dcheuel" path="res://Scenes/Entities/Player/StateMachine/States/Immobile.cs" id="5_ppr6r"]
 [ext_resource type="Script" uid="uid://caas3xvjayqj7" path="res://Scenes/Entities/Player/StateMachine/States/Moving.cs" id="6_rx1o7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_30dhn"]
-radius = 60.4152
+radius = 30.066593
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("StateLabel", "StateMachine")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("StateLabel", "Barrel1", "Barrel2", "StateMachine", "PrimaryWeaponProjectileCooldown", "SecondaryWeaponProjectileCooldown")]
 script = ExtResource("1_afppm")
 StateLabel = NodePath("Debug/Label")
+Barrel1 = NodePath("Barrel1")
+Barrel2 = NodePath("Barrel2")
 StateMachine = NodePath("PlayerStateMachine")
+Projectile = ExtResource("2_vgr12")
+PrimaryWeaponProjectileCooldown = NodePath("PrimaryCooldown")
+SecondaryWeaponProjectileCooldown = NodePath("SecondaryCooldown")
 
 [node name="SpeedComponent" type="Node" parent="."]
 script = ExtResource("2_hi4ft")
+Speed = 400.0
 metadata/_custom_type_script = "uid://h3qm880cjjtb"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_n1xdv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -49,6 +57,7 @@ entity = NodePath("../..")
 metadata/_custom_type_script = "uid://dda3vtjtruw2j"
 
 [node name="Debug" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = -56.0
@@ -57,6 +66,7 @@ offset_right = 60.0
 offset_bottom = -79.0
 
 [node name="Label" type="Label" parent="Debug"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -65,3 +75,19 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Barrel1" type="Marker2D" parent="."]
+position = Vector2(-16, -32)
+
+[node name="Barrel2" type="Marker2D" parent="."]
+position = Vector2(16, -32)
+
+[node name="PrimaryCooldown" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[node name="SecondaryCooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="Node2D" type="Node2D" parent="."]

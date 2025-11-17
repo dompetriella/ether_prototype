@@ -24,7 +24,7 @@ public partial class TestControl : Control
 
         AudioStream music = ResourceLoader.Load<AudioStream>($"{Paths.Music}/default_music.mp3");
 
-        PackedScene nextPage = ResourceLoader.Load<PackedScene>("uid://dnxdcwwed7h5p");
+        PackedScene nextPage = ResourceLoader.Load<PackedScene>("uid://by5y1ekxx86xy");
 
         PlaySoundEffectButton.Pressed += async () =>
         {
@@ -43,7 +43,9 @@ public partial class TestControl : Control
 
         NextPageButton.Pressed += () =>
         {
-            ScaffoldManager.Instance.ScaffoldNewSceneTree(newSceneTree: nextPage.Instantiate());
+            Node node = nextPage.Instantiate();
+            GD.Print(node);
+            ScaffoldManager.Instance.ScaffoldNewSceneTree(newSceneTree: node);
         };
     }
 }

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwviy0jhd20uc"]
+
+[ext_resource type="Script" uid="uid://bvau5go18pssk" path="res://Scenes/Objects/Projectile/Projectile.cs" id="1_ueogj"]
+
+[sub_resource type="Gradient" id="Gradient_pmpon"]
+offsets = PackedFloat32Array(0, 0.99666667)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ueogj"]
+gradient = SubResource("Gradient_pmpon")
+width = 4
+height = 8
+use_hdr = true
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ueogj"]
+radius = 2.0
+height = 8.0
+
+[node name="Projectile" type="Node2D" node_paths=PackedStringArray("Area2D")]
+script = ExtResource("1_ueogj")
+Area2D = NodePath("Area2D")
+Speed = 1000.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_ueogj")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_ueogj")
