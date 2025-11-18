@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://by5y1ekxx86xy"]
+[gd_scene load_steps=8 format=3 uid="uid://by5y1ekxx86xy"]
 
+[ext_resource type="Script" uid="uid://liq3pyl5ouha" path="res://Scenes/GameScene.cs" id="1_6h5vk"]
 [ext_resource type="PackedScene" uid="uid://db1c6cylyqy42" path="res://Scenes/Entities/Player/Player.tscn" id="1_x87qo"]
 [ext_resource type="PackedScene" uid="uid://dpop08al81sfj" path="res://Scenes/Entities/Enemy/Enemy.tscn" id="2_b6fju"]
 
@@ -16,7 +17,9 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 gradient = SubResource("Gradient_x87qo")
 fill_from = Vector2(0.44859812, 0.49766356)
 
-[node name="GameScene" type="Node"]
+[node name="GameScene" type="Node" node_paths=PackedStringArray("EnemySpawn")]
+script = ExtResource("1_6h5vk")
+EnemySpawn = NodePath("RootGame/Structure/Spawn")
 
 [node name="RootGame" type="Node2D" parent="."]
 
@@ -53,7 +56,6 @@ position = Vector2(578, 560)
 
 [node name="Enemy" parent="RootGame" instance=ExtResource("2_b6fju")]
 position = Vector2(574, 130)
-TotalHealth = 500
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

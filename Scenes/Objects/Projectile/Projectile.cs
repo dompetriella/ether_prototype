@@ -29,13 +29,8 @@ public partial class Projectile : Node2D
     {
         if (body is Enemy enemy)
         {
-
-            var enemyHealth = enemy.TakeDamage(damage: Damage);
+            enemy.HealthComponent.TakeDamage(damage: Damage);
             QueueFree();
-            if (enemyHealth <= 0)
-            {
-                enemy.Die();
-            }
         }
     }
 }

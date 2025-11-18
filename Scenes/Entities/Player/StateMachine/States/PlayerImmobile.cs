@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Immobile : State
+public partial class PlayerImmobile : State
 {
     [Export] public Entity entity;
 }

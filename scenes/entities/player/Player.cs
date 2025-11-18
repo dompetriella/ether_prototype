@@ -5,8 +5,16 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Threading.Tasks;
 
+
 public partial class Player : Entity
 {
+
+    [Export]
+    public HealthComponent HealthComponent;
+
+    [Export]
+    public SpeedComponent SpeedComponent;
+
     [Export]
     public Label StateLabel;
 
@@ -27,6 +35,7 @@ public partial class Player : Entity
 
     [Export]
     public Timer SecondaryWeaponProjectileCooldown;
+
 
     public PolarityState polarityState = PolarityState.Blue;
 

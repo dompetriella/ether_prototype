@@ -1,18 +1,58 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpop08al81sfj"]
+[gd_scene load_steps=9 format=3 uid="uid://dpop08al81sfj"]
 
 [ext_resource type="Script" uid="uid://cm30k8xioibyk" path="res://Scenes/Entities/Enemy/Enemy.cs" id="1_e58rf"]
 [ext_resource type="Texture2D" uid="uid://cqv2thbgs86be" path="res://Assets/Images/icon.svg" id="2_0uj21"]
+[ext_resource type="Script" uid="uid://h3qm880cjjtb" path="res://Common/Components/SpeedComponent.cs" id="2_md6ck"]
+[ext_resource type="Script" uid="uid://dckw0bhyi7v16" path="res://Common/Components/HealthComponent.cs" id="3_7iqi0"]
+[ext_resource type="Script" uid="uid://bo88naa0ui8xm" path="res://Scenes/Entities/Enemy/StateMachine/EnemyStateMachine.cs" id="5_7iqi0"]
+[ext_resource type="Script" uid="uid://b6bqs2uuca08n" path="res://Scenes/Entities/Enemy/StateMachine/States/EnemyIdle.cs" id="6_ywlli"]
+[ext_resource type="Script" uid="uid://dq7op7prx7upd" path="res://Scenes/Entities/Enemy/StateMachine/States/EnemyActive.cs" id="7_sf3su"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e58rf"]
 size = Vector2(134.96144, 121.11976)
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("HealthComponent", "SpeedComponent", "StateMachine")]
+scale = Vector2(0.75, 0.75)
+collision_layer = 2
 script = ExtResource("1_e58rf")
+HealthComponent = NodePath("Components/HealthComponent")
+SpeedComponent = NodePath("Components/SpeedComponent")
+StateMachine = NodePath("StateMachine")
+
+[node name="Components" type="Node" parent="."]
+
+[node name="SpeedComponent" type="Node" parent="Components" node_paths=PackedStringArray("ComponentOwner")]
+script = ExtResource("2_md6ck")
+ComponentOwner = NodePath("../..")
+Speed = 25.0
+metadata/_custom_type_script = "uid://h3qm880cjjtb"
+
+[node name="HealthComponent" type="Node" parent="Components" node_paths=PackedStringArray("ComponentOwner")]
+script = ExtResource("3_7iqi0")
+ComponentOwner = NodePath("../..")
+MaxHealth = 400
+metadata/_custom_type_script = "uid://dckw0bhyi7v16"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_0uj21")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.023860326, 7.5279574)
+position = Vector2(0, 8)
 rotation = 1.5690325
 shape = SubResource("RectangleShape2D_e58rf")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("DefaultState")]
+script = ExtResource("5_7iqi0")
+DefaultState = NodePath("EnemyActive")
+metadata/_custom_type_script = "uid://dkgkmyjjlowyn"
+
+[node name="EnemyIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("Entity")]
+script = ExtResource("6_ywlli")
+Entity = NodePath("../..")
+metadata/_custom_type_script = "uid://dda3vtjtruw2j"
+
+[node name="EnemyActive" type="Node" parent="StateMachine" node_paths=PackedStringArray("Entity", "SpeedComponent")]
+script = ExtResource("7_sf3su")
+Entity = NodePath("../..")
+SpeedComponent = NodePath("../../Components/SpeedComponent")
+metadata/_custom_type_script = "uid://dda3vtjtruw2j"

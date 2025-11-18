@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Idle : State
+public partial class PlayerMoving : State
 {
     [Export] public Entity Entity;
     [Export] public SpeedComponent SpeedComponent;
@@ -10,9 +10,9 @@ public partial class Idle : State
     {
         base.Update(delta);
 
-        if (Entity.Velocity != Vector2.Zero)
+        if (Entity.Velocity == Vector2.Zero)
         {
-            EmitSignal(State.SignalName.TransitionState, this, PlayerStateMachine.States.Moving);
+            EmitSignal(State.SignalName.TransitionState, this, PlayerStateMachine.States.Idle);
         }
 
     }

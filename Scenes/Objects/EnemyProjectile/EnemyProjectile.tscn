@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bugrwbbeua7ah"]
+
+[ext_resource type="Script" uid="uid://h3qm880cjjtb" path="res://Common/Components/SpeedComponent.cs" id="1_31oqx"]
+[ext_resource type="Texture2D" uid="uid://dynv3wr20txx1" path="res://Assets/Images/enemy_projectile.png" id="1_80d5x"]
+[ext_resource type="Script" uid="uid://bxsr0ok5a4e0j" path="res://Scenes/Objects/EnemyProjectile/EnemyProjectile.cs" id="1_d03jw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d03jw"]
+radius = 3.0
+
+[node name="EnemyProjectile" type="Node2D" node_paths=PackedStringArray("SpeedComponent", "Area2D")]
+scale = Vector2(1.2, 1.2)
+script = ExtResource("1_d03jw")
+SpeedComponent = NodePath("SpeedComponent")
+Area2D = NodePath("Area2D")
+
+[node name="SpeedComponent" type="Node" parent="."]
+script = ExtResource("1_31oqx")
+Speed = 75.0
+metadata/_custom_type_script = "uid://h3qm880cjjtb"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_80d5x")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_d03jw")

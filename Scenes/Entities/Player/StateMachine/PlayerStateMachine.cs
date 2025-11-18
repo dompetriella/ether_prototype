@@ -5,9 +5,9 @@ public partial class PlayerStateMachine : StateMachine
 {
     public static class States
     {
-        public const string Immobile = "Immobile";
-        public const string Moving = "Moving";
-        public const string Idle = "Idle";
+        public const string Immobile = "PlayerImmobile";
+        public const string Moving = "PlayerMoving";
+        public const string Idle = "PlayerIdle";
     }
 
     public override void _Ready()
